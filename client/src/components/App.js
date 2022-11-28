@@ -1,6 +1,7 @@
 import '../App.css';
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import Login from '../pages/Login';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -13,10 +14,12 @@ function App() {
       }
     });
   }, []);
+
+  if (!user) return <Login/>
   
   return (
     <div>
-
+      Welcome!
     </div>
   );
 }
