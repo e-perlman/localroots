@@ -15,8 +15,8 @@ function App() {
     });
   }, []);
 
-  if (!user) return <Login/>
-  
+  if (!user) return <Login onLogin={setUser}/>
+
   return (
     <div>
       Welcome!

@@ -2,12 +2,12 @@ import React from 'react'
 import LoginForm from '../components/LoginForm'
 import SignupForm from '../components/SignupForm'
 
-const Login = () => {
+const Login = ({onLogin}) => {
   return (
     <div>
         Login
-      <LoginForm></LoginForm>
-      <SignupForm></SignupForm>
+      <LoginForm ></LoginForm>
+      <SignupForm onLogin={onLogin}></SignupForm>
     </div>
   )
 }
