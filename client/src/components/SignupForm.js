@@ -45,6 +45,7 @@ const SignupForm = ({onLogin}) => {
 
   return (
     <form onSubmit={handleSubmit}>
+        <h2> SignUp</h2>
         <div>
             <label htmlFor="username">Username</label>
             <input
