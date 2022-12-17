@@ -20,7 +20,7 @@ function App() {
 
   return (
     <>
-      Welcome!
+      <h2>Welcome {user.username}!</h2>
       <NavBar user={user} setUser={setUser}></NavBar>
     </>
   );

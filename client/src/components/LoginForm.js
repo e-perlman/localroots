@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Error from "../style/Error"
+import Button from "../style/Button"
+import { FormGroup, Label, Input, Message } from "../style/Forms"
 
 const LoginForm = ({onLogin}) => {
   const [userInfo, setUserInfo]=useState({
@@ -38,33 +40,34 @@ const LoginForm = ({onLogin}) => {
   return (
     <form onSubmit={handleSubmit}>
         <h2> Login</h2>
-        <div>
-            <label htmlFor="username">Username</label>
-            <input
+        <FormGroup>
+            <Label htmlFor="username">Username</Label>
+            <Input
                 type="text"
                 id="username"
                 autoComplete="off"
                 value={userInfo.username}
                 onChange={handleChange}
             />
-        </div>
-        <div>
-            <label htmlFor="password">Password</label>
-            <input
+        </FormGroup>
+        <FormGroup>
+            <Label htmlFor="password">Password</Label>
+            <Input
                 type="password"
                 id="password"
                 autoComplete="off"
                 value={userInfo.password}
                 onChange={handleChange}
             />
-        </div>
-        <button type="submit">Login</button>
-        <div>
+        </FormGroup>
+        <FormGroup>
+          <Button type="submit">Login</Button>
+        </FormGroup>
+        <FormGroup>
             {errors.map((err) => (
             <Error key={err}>{err}</Error>
             ))}
-        </div>
-
+        </FormGroup>
     </form>
   )
 }

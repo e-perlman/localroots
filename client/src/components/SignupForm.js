@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Error from "../style/Error"
+import Button from "../style/Button"
+import { FormGroup, Input, Label, Textarea } from "../style/Forms";
+
 
 const SignupForm = ({onLogin}) => {
     const [userInfo, setUserInfo]=useState({
@@ -46,60 +49,60 @@ const SignupForm = ({onLogin}) => {
   return (
     <form onSubmit={handleSubmit}>
         <h2> SignUp</h2>
-        <div>
-            <label htmlFor="username">Username</label>
-            <input
+        <FormGroup>
+            <Label htmlFor="username">Username</Label>
+            <Input
                 type="text"
                 id="username"
                 autoComplete="off"
                 value={userInfo.username}
                 onChange={handleChange}
             />
-        </div>
-        <div>
-            <label htmlFor="password">Password</label>
-            <input
+        </FormGroup>
+        <FormGroup>
+            <Label htmlFor="password">Password</Label>
+            <Input
                 type="password"
                 id="password"
                 autoComplete="off"
                 value={userInfo.password}
                 onChange={handleChange}
             />
-        </div>
-        <div>
-            <label htmlFor="password">Password Confirmation</label>
-            <input
+        </FormGroup>
+        <FormGroup>
+            <Label htmlFor="password">Password Confirmation</Label>
+            <Input
                 type="password"
                 id="passwordConfirmation"
                 autoComplete="off"
                 value={userInfo.passwordConfirmation}
                 onChange={handleChange}
             />
-        </div>
-        <div>
-            <label htmlFor="imageUrl">Profile Picture</label>
-            <input
+        </FormGroup>
+        <FormGroup>
+            <Label htmlFor="imageUrl">Profile Picture</Label>
+            <Input
                 type="text"
                 id="imageUrl"
                 value={userInfo.imageUrl}
                 onChange={handleChange}
             />
-        </div>
-        <div>
-            <label htmlFor="bio">Bio</label>
-            <textarea
+        </FormGroup>
+        <FormGroup>
+            <Label htmlFor="bio">Bio</Label>
+            <Textarea
                 rows="3"
                 id="bio"
                 value={userInfo.bio}
                 onChange={handleChange}
             />
-        </div>
-        <button type="submit">Sign Up</button>
-        <div>
+        </FormGroup>
+        <Button type="submit">Sign Up</Button>
+        <FormGroup>
             {errors.map((err) => (
             <Error key={err}>{err}</Error>
             ))}
-        </div>
+        </FormGroup>
 
     </form>
   )

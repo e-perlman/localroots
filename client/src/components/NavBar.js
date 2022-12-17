@@ -1,4 +1,6 @@
 import React from 'react'
+import Button from "../style/Button"
+
 
 const NavBar = ({user, setUser}) => {
 
@@ -11,7 +13,7 @@ const NavBar = ({user, setUser}) => {
       }
   return (
     <div>
-      <button onClick={handleLogout}> Logout</button>
+      <Button onClick={handleLogout}> Logout</Button>
     </div>
   )
 }
