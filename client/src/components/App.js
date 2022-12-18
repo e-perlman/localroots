@@ -22,6 +22,12 @@ function App() {
     <>
       <h2>Welcome {user.username}!</h2>
       <NavBar user={user} setUser={setUser}></NavBar>
+      <main>
+        <Switch>
+          <Route path="/new"></Route>
+          <Route path="/"></Route>
+        </Switch>
+      </main>
     </>
   );
 }
