@@ -7,7 +7,7 @@ export const FormGroup = styled.div`
 `;
 
 export const Label = styled.label`
-    color: #363636;
+    color: hsla(0, 0%, 100%, 0.88);
     display: block;
     font-size: 1rem;
     font-weight: 700;
