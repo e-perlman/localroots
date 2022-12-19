@@ -3,11 +3,14 @@ import LoginForm from '../components/LoginForm'
 import SignupForm from '../components/SignupForm'
 import styled from "styled-components";
 import Button from "../style/Button"
+import Logo from "../style/Logo"
+
 
 const Login = ({onLogin}) => {
     const [seeLogin,setSeeLogin]=useState(true)
   return (
     <Wrapper>
+      <Logo>Local Roots</Logo>
         {seeLogin? (
             <>
                 <LoginForm onLogin={onLogin}></LoginForm>

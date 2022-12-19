@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../style/Button"
-
+import Logo from "../style/Logo"
 
 const NavBar = ({user, setUser}) => {
 
@@ -16,7 +16,7 @@ const NavBar = ({user, setUser}) => {
   return (
     <Wrapper>
       <NavCart>
-        <Button as={Link} to="/"> My Cart</Button>
+        <Button as={Link} to="/"> My Items</Button>
       </NavCart>
       <Logo>
         <Link to="/">Local Roots</Link>
@@ -25,7 +25,7 @@ const NavBar = ({user, setUser}) => {
         <Button as={Link} to="/new">
           New Product
         </Button>
-        <Button onClick={handleLogout}> Logout</Button>
+        <Button color="secondary" onClick={handleLogout}> Logout</Button>
       </Nav>
       
     </Wrapper>
@@ -39,19 +39,6 @@ const Wrapper = styled.header`
   padding: 8px;
 `;
 
-const Logo = styled.h1`
-  font-family: 'Montserrat Subrayada', sans-serif;
-  font-size: 3rem;
-  color: #a934ff;
-  margin: 0;
-  text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
-  line-height: 1;
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-`;
 
 const Nav = styled.nav`
   display: flex;
