@@ -14,13 +14,13 @@ class ProductsController < ApplicationController
     end
 
     def show
-        gym=find_product
-        render json: gym, status: :ok
+        product=find_product
+        render json: product, status: :ok
     end
 
     def destroy
-        gym=find_product
-        gym.destroy
+        product=find_product
+        product.destroy
         head :no_content
     end
 

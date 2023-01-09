@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import ProductCard from "../components/ProductCard";
 import Box from "../style/Box"
+import Button from "../style/Button"
 
 const AllProducts = () => {
     const [products, setProducts]=useState([])
@@ -14,14 +16,7 @@ const AllProducts = () => {
   return (
     <Wrapper>
       {products.map((product) => (
-          <Card key={product.id}>
-            <Box>
-              <h2>{product.name}</h2>
-              <h3>{product.category}</h3>
-              <h3>{product.store}</h3>
-              <h4>{product.price}</h4>
-            </Box>
-          </Card>
+         <ProductCard key={product.id} product={product}></ProductCard>
         ))
       }
     </Wrapper>
