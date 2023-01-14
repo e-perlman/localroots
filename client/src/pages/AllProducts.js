@@ -23,12 +23,11 @@ const AllProducts = () => {
   )
 }
 const Wrapper = styled.section`
-  max-width: 800px;
+  justify-content: center;  
+  display: flex;
+  flex: 4;
+  flex-wrap: wrap;
   margin: 40px auto;
-`;
-
-const Card = styled.article`
-  margin-bottom: 24px;
 `;
 
 export default AllProducts
