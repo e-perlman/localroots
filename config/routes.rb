@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   resources :products, only:[:index, :create, :show, :destroy]
 
   #Orders Routes
-  resources :products, only:[:create, :destroy]
+  resources :orders, only:[:create, :destroy]
 end
