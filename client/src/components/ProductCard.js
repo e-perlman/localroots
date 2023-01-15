@@ -37,9 +37,9 @@ const ProductCard = ({product}) => {
     <form onSubmit={handleSubmit}>
         <Card key={product.id}>
                 <h2>{product.name}</h2>
-                <h3>{product.category}</h3>
-                <h3>{product.store}</h3>
-                <h4>{product.price}</h4>
+                <h3>Category: {product.category}</h3>
+                <h3>Store: {product.store}</h3>
+                <h4>${product.price}</h4>
             <FormGroup>
                 <NumberLabel htmlFor="quantity">Quantity:</NumberLabel>
                 <NumberInput 
@@ -48,12 +48,12 @@ const ProductCard = ({product}) => {
                     onChange={(e)=>setQuantity(e.target.value)}>
                 </NumberInput>
             </FormGroup>
-            <Button type='submit'>{isAdded ? "Product Added" : "Add Product"}</Button>
+            <Button type='submit'>{isAdded ? "Product Added!" : "Add Product"}</Button>
             <FormGroup>
-            {errors.map((err) => (
-              <Error key={err}>{err}</Error>
-            ))}
-          </FormGroup>
+                {errors.map((err) => (
+                <Error key={err}>{err}</Error>
+                ))}
+        </FormGroup>
         </Card>
     </form>
   )

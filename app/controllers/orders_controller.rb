@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-    before_action :authorize
+    # before_action :authorize
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     
     def create
@@ -19,7 +19,7 @@ class OrdersController < ApplicationController
     end
 
     def render_unprocessable_entity_response(invalid)
-        render json: { errors: invalid.record.errors }, status: :unprocessable_entity
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 
     def authorize
