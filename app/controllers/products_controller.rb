@@ -24,6 +24,16 @@ class ProductsController < ApplicationController
         head :no_content
     end
 
+    def myproducts
+        if session[:user_id]
+            user=User.find_by(id:[session[:user_id]])
+            products=user.products
+            render json: products, status: :ok
+        else
+            render json: {errors:["Not logged in."]}, status: :unauthorized
+        end
+    end
+
     private
 
     def product_params

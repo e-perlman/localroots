@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   delete "/logout", to: "sessions#destroy"
 
+  #My Products Routes
+  get "/myitems", to: "products#myproducts"
+
   #Products Routes
   resources :products, only:[:index, :create, :show, :destroy]
 

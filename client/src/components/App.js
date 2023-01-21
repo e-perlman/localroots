@@ -30,11 +30,11 @@ function App() {
           <Route path="/new_product">
             <NewProduct></NewProduct>
           </Route>
-          <Route path="/">
-            <AllProducts></AllProducts>
-          </Route>
           <Route path="/my_products">
             <MyProducts></MyProducts>
+          </Route>
+          <Route path="/">
+            <AllProducts></AllProducts>
           </Route>
         </Switch>
       </main>
