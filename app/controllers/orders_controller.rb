@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
     # before_action :authorize
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+    rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+
     
     def index
         if session[:user_id]
@@ -22,6 +24,12 @@ class OrdersController < ApplicationController
         end
     end
 
+    def update
+        order=Order.find_by(id: params[:id])
+        order.update!(order_params)
+        render json: order, status: :created
+    end
+
     private
     
     def order_params
@@ -34,5 +42,9 @@ class OrdersController < ApplicationController
 
     def authorize
         return render json: {errors: ["Not authorized."]}, status: :unauthorized unless session.include? :user_id
+    end
+
+    def render_not_found_response
+        render json: {errors:["Order not found."]}, status: :not_found
     end
 end

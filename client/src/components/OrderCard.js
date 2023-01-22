@@ -10,36 +10,69 @@ import { useHistory } from "react-router";
 const OrderCard = ({order}) => {
     const [editOrder,setEditOrder]=useState(false)
     const [quantity,setQuantity]=useState(order.quantity)
+    const [total, setTotal]=useState(order.product.price * order.quantity)
+    const [errors,setErrors]=useState([])
+
     const product=order.product
-    const total = order.product.price * order.quantity
+
+    const handleOrderDelete = ()=>{
+
+    }
+
+    const handleOrderEdit= (e) =>{
+        e.preventDefault();
+        setErrors([]);
+        fetch(`/orders/${order.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                quantity,
+            }),
+            }).then((r) => {
+            if (r.ok) {
+                r.json().then((order) => setTotal(order.quantity * product.price));
+                setEditOrder(!editOrder);
+            } else {
+                r.json().then((err) => setErrors(err.errors));
+            }
+        });
+    }
 
     return (
-    <Card key={order.id}>
-                <h2>{order.product.name}</h2>
-                <h3>Category: {product.category}</h3>
-                <h3>Store: {product.store}</h3>
-                <h4>Price: ${product.price}</h4>
-                {editOrder?(
+        <Card key={order.id}>
+            <h2>{order.product.name}</h2>
+            <h3>Category: {product.category}</h3>
+            <h3>Store: {product.store}</h3>
+            <h4>Price: ${product.price}</h4>
+            {editOrder?(
+                <>
+                    <NumberLabel htmlFor="quantity">Quantity:</NumberLabel>
                     <NumberInput 
                         type='number'
                         value={quantity}
                         onChange={(e)=>setQuantity(e.target.value)}>
                     </NumberInput>
-                ):(
-                    <h4>Quantity: {order.quantity}</h4>
-                )}
-                <h4>Total: ${total}</h4>
+                </>
+            ):(
+                <h4>Quantity: {quantity}</h4>
+            )}
+            <h4>Total: ${total}</h4>
 
             <ButtonGroup>
                 <Button onClick={()=>setEditOrder(!editOrder)}> 
                     {editOrder?("Cancel Edit"):("Edit Quantity")}
                 </Button>
                 {editOrder?(
-                    <Button type='submit' color='secondary'>Update Order</Button>
+                    <Button onClick={handleOrderEdit} color='secondary'>Update Order</Button>
                 ):(
-                    <Button type='submit'>Delete Item</Button>
+                    <Button onClick={handleOrderDelete}>Delete Item</Button>
                 )}
             </ButtonGroup>
+            {errors.map((err) => (
+            <Error key={err}>{err}</Error>
+            ))}
         </Card>
   )
 }
@@ -80,10 +113,5 @@ const ButtonGroup = styled.nav`
   gap: 15px;
 `;
 
-const Divider = styled.hr`
-  border: none;
-  border-bottom: 1px solid #ccc;
-  margin: 16px 0;
-`;
 
 
