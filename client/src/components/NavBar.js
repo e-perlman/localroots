@@ -16,13 +16,13 @@ const NavBar = ({user, setUser}) => {
   return (
     <Wrapper>
       <NavCart>
-        <Button as={Link} to="/my_products"> My Items</Button>
+        <Button as={Link} to="/my_items"> My Items</Button>
       </NavCart>
       <Logo>
         <Link to="/">Local Roots</Link>
       </Logo>
       <Nav>
-        <Button as={Link} to="/new">
+        <Button as={Link} to="/new_product">
           New Product
         </Button>
         <Button color="secondary" onClick={handleLogout}> Logout</Button>

@@ -5,7 +5,7 @@ import Login from '../pages/Login';
 import NavBar from './NavBar'
 import NewProduct from '../pages/NewProduct';
 import AllProducts from '../pages/AllProducts';
-import MyProducts from '../pages/MyProducts';
+import MyOrders from '../pages/MyOrders';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -30,8 +30,8 @@ function App() {
           <Route path="/new_product">
             <NewProduct></NewProduct>
           </Route>
-          <Route path="/my_products">
-            <MyProducts></MyProducts>
+          <Route path="/my_items">
+            <MyOrders user={user}></MyOrders>
           </Route>
           <Route path="/">
             <AllProducts></AllProducts>

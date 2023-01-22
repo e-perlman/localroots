@@ -2,6 +2,16 @@ class OrdersController < ApplicationController
     # before_action :authorize
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     
+    def index
+        if session[:user_id]
+            user=User.find_by(id:[session[:user_id]])
+            orders=user.orders
+            render json: orders, include: :product, status: :ok
+        else
+            render json: {errors:["Not logged in."]}, status: :unauthorized
+        end
+    end
+    
     def create
         if session[:user_id]
             user=User.find_by(id:[session[:user_id]])
