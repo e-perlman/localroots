@@ -15,13 +15,18 @@ const MyOrders = (user) => {
         .then(setOrders);
     }, []);
 
+    const removeOrder = (orderId) => {
+      const updatedOrders=orders.filter(order=>order.id!==orderId)
+      setOrders(updatedOrders)
+    }
+
   return (
     <>
     <h1>{user.user.username}</h1>
       {orders.length > 0?(
         <Wrapper>
           {orders.map((order) => (
-            <OrderCard key={order.id} order={order}></OrderCard>
+            <OrderCard key={order.id} order={order} onDeleteOrder={removeOrder}></OrderCard>
           ))}
         </Wrapper>
       ):(

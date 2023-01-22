@@ -7,15 +7,23 @@ import Error from "../style/Error"
 import { useHistory } from "react-router";
 
 
-const OrderCard = ({order}) => {
+const OrderCard = ({order, onDeleteOrder}) => {
     const [editOrder,setEditOrder]=useState(false)
     const [quantity,setQuantity]=useState(order.quantity)
     const [total, setTotal]=useState(order.product.price * order.quantity)
     const [errors,setErrors]=useState([])
-
     const product=order.product
 
     const handleOrderDelete = ()=>{
+        fetch(`/orders/${order.id}`, {
+            method: "DELETE",
+            }).then((r) => {
+            if (r.ok) {
+                onDeleteOrder(order.id);
+            } else {
+                r.json().then((err) => setErrors(err.errors));
+            }
+        });
 
     }
 

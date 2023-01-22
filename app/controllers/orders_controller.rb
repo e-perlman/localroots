@@ -1,39 +1,46 @@
 class OrdersController < ApplicationController
-    # before_action :authorize
+    before_action :authorize
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     
     def index
-        if session[:user_id]
-            user=User.find_by(id:[session[:user_id]])
-            orders=user.orders
-            render json: orders, include: :product, status: :ok
-        else
-            render json: {errors:["Not logged in."]}, status: :unauthorized
-        end
+        user=find_user
+        orders=user.orders
+        render json: orders, include: :product, status: :ok
     end
     
     def create
-        if session[:user_id]
-            user=User.find_by(id:[session[:user_id]])
-            order=user.orders.create!(order_params)
-            render json: order, status: :created
-        else
-            render json: {errors:["Not logged in."]}, status: :unauthorized
-        end
+        user=find_user
+        order=user.orders.create!(order_params)
+        render json: order, status: :created
     end
 
     def update
-        order=Order.find_by(id: params[:id])
+        order=find_order
         order.update!(order_params)
         render json: order, status: :created
     end
 
+    def destroy
+        order=find_order
+        order.destroy
+        head :no_content
+    end
+
     private
     
+    def find_user
+        User.find_by(id:[session[:user_id]])
+    end
+
     def order_params
         params.permit(:quantity, :product_id)
+    end
+
+    def find_order
+        user=User.find_by(id:[session[:user_id]])
+        user.orders.find(params[:id])
     end
 
     def render_unprocessable_entity_response(invalid)
@@ -41,7 +48,7 @@ class OrdersController < ApplicationController
     end
 
     def authorize
-        return render json: {errors: ["Not authorized."]}, status: :unauthorized unless session.include? :user_id
+        return render json: {errors: ["Not logged in."]}, status: :unauthorized unless session.include? :user_id
     end
 
     def render_not_found_response
