@@ -6,15 +6,15 @@ import OrderCard from "../components/OrderCard"
 import Button from "../style/Button"
 
 
-const MyOrders = ({user}) => {
-  const [orders, setOrders]=useState([user.orders])
+const MyOrders = ({myorders}) => {
+  const [orders, setOrders]=useState(myorders)
 
     // useEffect(() => {
     //   fetch("/orders")
     //     .then((r) => r.json())
     //     .then(setOrders);
     // }, []);
-    
+    console.log(orders)
 
     const removeOrder = (orderId) => {
       const updatedOrders=orders.filter(order=>order.id!==orderId)
@@ -22,8 +22,8 @@ const MyOrders = ({user}) => {
     }
 
   return (
-    <>
-    <h1>{user.username}</h1>
+    <Wrap>
+    <h1>My Orders</h1>
       {orders.length > 0?(
         <Wrapper>
           {orders.map((order) => (
@@ -38,7 +38,7 @@ const MyOrders = ({user}) => {
           </Button>
         </Container>
       )}
-    </>
+    </Wrap>
   )
 }
 
@@ -53,8 +53,7 @@ const Wrapper = styled.section`
 `;
 
 const Wrap = styled.section`
-  max-width: 500px;
-  margin: 40px auto;
+  justify-content: center;
   padding: 16px;
 `;
 

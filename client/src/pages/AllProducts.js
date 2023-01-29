@@ -4,7 +4,7 @@ import ProductCard from "../components/ProductCard";
 import Box from "../style/Box"
 import Button from "../style/Button"
 
-const AllProducts = () => {
+const AllProducts = ({onAddOrder}) => {
     const [products, setProducts]=useState([])
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const AllProducts = () => {
   return (
     <Wrapper>
       {products.map((product) => (
-         <ProductCard key={product.id} product={product}></ProductCard>
+         <ProductCard key={product.id} product={product} onAddOrder={onAddOrder}></ProductCard>
         ))
       }
     </Wrapper>

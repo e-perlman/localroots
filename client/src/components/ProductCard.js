@@ -8,7 +8,7 @@ import { useHistory } from "react-router";
 
 
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product, onAddOrder}) => {
     const [quantity,setQuantity]=useState("1")
     const [errors,setErrors]=useState([])
     const [isAdded, setIsAdded] = useState(false);
@@ -28,6 +28,9 @@ const ProductCard = ({product}) => {
             }).then((r) => {
             if (r.ok) {
                 setIsAdded(true);
+                r.json().then((product) => {
+                    onAddOrder(product)
+                  });
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }

@@ -50,7 +50,8 @@ const OrderCard = ({order, onDeleteOrder}) => {
 
     return (
         <Card key={order.id}>
-            <h2>{order.product.name}</h2>
+            <h2>Order #{order.id}</h2>
+            <h3>Product: {order.product.name}</h3>
             <h3>Category: {product.category}</h3>
             <h3>Store: {product.store}</h3>
             <h4>Price: ${product.price}</h4>
@@ -70,12 +71,12 @@ const OrderCard = ({order, onDeleteOrder}) => {
 
             <ButtonGroup>
                 <Button onClick={()=>setEditOrder(!editOrder)}> 
-                    {editOrder?("Cancel Edit"):("Edit Quantity")}
+                    {editOrder?("Cancel Edit"):("Edit Order Quantity")}
                 </Button>
                 {editOrder?(
-                    <Button onClick={handleOrderEdit} color='secondary'>Update Order</Button>
+                    <Button onClick={handleOrderEdit} color='secondary'>Submit Order</Button>
                 ):(
-                    <Button onClick={handleOrderDelete}>Delete Item</Button>
+                    <Button onClick={handleOrderDelete}>Delete Order</Button>
                 )}
             </ButtonGroup>
             {errors.map((err) => (
@@ -92,7 +93,7 @@ const Card = styled.div`
     box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 10%),
         0 0 0 1px rgb(10 10 10 / 2%);
     padding: 40px;
-    width: 400px;
+    width: 700px;
     margin-right: 20px;
 
 `;

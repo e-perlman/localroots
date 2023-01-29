@@ -9,6 +9,7 @@ import MyOrders from '../pages/MyOrders';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [orders,setOrders]=useState([])
 
   useEffect(() => {
     // auto-login
@@ -16,10 +17,15 @@ function App() {
       if (r.ok) {
         r.json().then((user) => {
           setUser(user)
+          setOrders(user.orders)
         });
       }
     });
   }, []);
+
+  const handleNewOrder = (newOrder)=>{
+    setOrders([...orders,newOrder])
+  }
 
   if (!user) return <Login onLogin={setUser}/>
 
@@ -33,10 +39,10 @@ function App() {
             <NewProduct></NewProduct>
           </Route>
           <Route path="/my_orders">
-            <MyOrders user={user}></MyOrders>
+            <MyOrders myorders={orders}></MyOrders>
           </Route>
           <Route path="/">
-            <AllProducts></AllProducts>
+            <AllProducts onAddOrder={handleNewOrder}></AllProducts>
           </Route>
         </Switch>
       </main>
