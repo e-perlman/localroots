@@ -14,7 +14,9 @@ function App() {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {
+          setUser(user)
+        });
       }
     });
   }, []);
@@ -30,7 +32,7 @@ function App() {
           <Route path="/new_product">
             <NewProduct></NewProduct>
           </Route>
-          <Route path="/my_items">
+          <Route path="/my_orders">
             <MyOrders user={user}></MyOrders>
           </Route>
           <Route path="/">

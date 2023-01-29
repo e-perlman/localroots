@@ -16,7 +16,7 @@ const NavBar = ({user, setUser}) => {
   return (
     <Wrapper>
       <NavCart>
-        <Button as={Link} to="/my_items"> My Items</Button>
+        <Button as={Link} to="/my_orders"> My Orders</Button>
       </NavCart>
       <Logo>
         <Link to="/">Local Roots</Link>

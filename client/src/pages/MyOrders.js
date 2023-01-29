@@ -6,14 +6,15 @@ import OrderCard from "../components/OrderCard"
 import Button from "../style/Button"
 
 
-const MyOrders = (user) => {
-  const [orders, setOrders]=useState([])
+const MyOrders = ({user}) => {
+  const [orders, setOrders]=useState([user.orders])
 
-    useEffect(() => {
-      fetch("/orders")
-        .then((r) => r.json())
-        .then(setOrders);
-    }, []);
+    // useEffect(() => {
+    //   fetch("/orders")
+    //     .then((r) => r.json())
+    //     .then(setOrders);
+    // }, []);
+    
 
     const removeOrder = (orderId) => {
       const updatedOrders=orders.filter(order=>order.id!==orderId)
@@ -22,7 +23,7 @@ const MyOrders = (user) => {
 
   return (
     <>
-    <h1>{user.user.username}</h1>
+    <h1>{user.username}</h1>
       {orders.length > 0?(
         <Wrapper>
           {orders.map((order) => (
