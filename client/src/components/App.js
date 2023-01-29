@@ -26,17 +26,23 @@ function App() {
     });
   }, []);
 
+  const distinctProducts =(products) =>{
+    return [...new Map(products.map((item) => [item["id"], item])).values(),]
+  }
  
   const handleNewOrder = (newOrder)=>{
     setOrders([...orders,newOrder])
-    setProducts([...products,newOrder.product])
+    const duplicateProducts=[...products,newOrder.product]
+    const newProducts=distinctProducts(duplicateProducts)
+    setProducts(newProducts)
   }
   const handleRemoveOrder = (orderId,productId) => {
     const updatedOrders=orders.filter(order=>order.id!==orderId)
     setOrders(updatedOrders)
 
-    const updatedProducts=products.filter(product=>product.id!==productId)
-    setProducts(updatedProducts)
+    const duplicateProducts=updatedOrders.map((order)=>order.product)
+    const newProducts=distinctProducts(duplicateProducts)
+    setProducts(newProducts)
   }
 
 
