@@ -51,7 +51,7 @@ const ProductCard = ({product, onAddOrder}) => {
                     onChange={(e)=>setQuantity(e.target.value)}>
                 </NumberInput>
             </FormGroup>
-            <Button type='submit'>{isAdded ? "Product Added!" : "Add Product"}</Button>
+            <Button type='submit'>Place Order</Button>
             <FormGroup>
                 {errors.map((err) => (
                 <Error key={err}>{err}</Error>

@@ -19,7 +19,7 @@ const OrderCard = ({order, onDeleteOrder}) => {
             method: "DELETE",
             }).then((r) => {
             if (r.ok) {
-                onDeleteOrder(order.id);
+                onDeleteOrder(order.id, order.product.id);
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }

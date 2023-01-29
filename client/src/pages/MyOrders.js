@@ -6,20 +6,8 @@ import OrderCard from "../components/OrderCard"
 import Button from "../style/Button"
 
 
-const MyOrders = ({myorders}) => {
-  const [orders, setOrders]=useState(myorders)
+const MyOrders = ({orders, onDeleteOrder}) => {
 
-    // useEffect(() => {
-    //   fetch("/orders")
-    //     .then((r) => r.json())
-    //     .then(setOrders);
-    // }, []);
-    console.log(orders)
-
-    const removeOrder = (orderId) => {
-      const updatedOrders=orders.filter(order=>order.id!==orderId)
-      setOrders(updatedOrders)
-    }
 
   return (
     <Wrap>
@@ -27,14 +15,14 @@ const MyOrders = ({myorders}) => {
       {orders.length > 0?(
         <Wrapper>
           {orders.map((order) => (
-            <OrderCard key={order.id} order={order} onDeleteOrder={removeOrder}></OrderCard>
+            <OrderCard key={order.id} order={order} onDeleteOrder={onDeleteOrder}></OrderCard>
           ))}
         </Wrapper>
       ):(
         <Container>
-          <h2>No Items Found</h2>
+          <h2>No Orders Found</h2>
           <Button as={Link} to="/">
-            Add A New Item
+            Place a New Order
           </Button>
         </Container>
       )}
