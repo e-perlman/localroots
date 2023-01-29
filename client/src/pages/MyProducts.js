@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import ProductCard from "../components/ProductCard";
 import Button from "../style/Button"
 
 const MyProducts = ({products}) => {
-    console.log(products)
+
   return (
     <Wrap>
         <h1>My Products</h1>

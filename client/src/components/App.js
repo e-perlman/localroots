@@ -13,13 +13,8 @@ function App() {
   const [orders,setOrders]=useState([])
   const [products,setProducts]=useState([])
 
-
-  console.log('from app')
-  console.log(products)
-
   useEffect(() => {
     // auto-login
-    console.log('auto login')
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
