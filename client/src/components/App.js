@@ -9,7 +9,6 @@ import MyOrders from '../pages/MyOrders';
 import MyProducts from '../pages/MyProducts';
 
 function App() {
-  // const[user,setUser]=useState(null)
   const [user, setUser]=useState({
     username:null,
     image_url:null,
@@ -25,7 +24,6 @@ function App() {
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          console.log(user.orders)
           setUser(user)
         });
       }

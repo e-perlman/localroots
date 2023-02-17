@@ -28,7 +28,9 @@ const LoginForm = ({onLogin}) => {
           }),
         }).then((r) => {
           if (r.ok) {
-            r.json().then((user) => onLogin(user));
+            r.json().then((user) => {
+              onLogin(user)
+            });
             history.push("/");
           } else {
             r.json().then((err) => setErrors(err.errors));
