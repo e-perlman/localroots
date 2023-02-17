@@ -9,21 +9,35 @@ import MyOrders from '../pages/MyOrders';
 import MyProducts from '../pages/MyProducts';
 
 function App() {
-  const [user, setUser] = useState(null); 
-  const [orders,setOrders]=useState([])
-  const [products,setProducts]=useState([])
+  // const[user,setUser]=useState(null)
+  const [user, setUser]=useState({
+    username:null,
+    image_url:null,
+    bio:null,
+    orders:[],
+    products:[]
+  })
+  const [allProducts, setAllProducts]=useState([])
+
 
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
+          console.log(user.orders)
           setUser(user)
-          setOrders(user.orders)
-          setProducts(user.products)
         });
       }
     });
+  }, []);
+
+  useEffect(() => {
+    fetch("/products").then((r) =>{
+      if (r.ok) {
+        r.json().then((products)=>setAllProducts(products))
+      }
+    })
   }, []);
 
   const distinctProducts =(products) =>{
@@ -31,21 +45,22 @@ function App() {
   }
  
   const handleNewOrder = (newOrder)=>{
-    setOrders([...orders,newOrder])
-    const duplicateProducts=[...products,newOrder.product]
+    const duplicateProducts=[...user.products,newOrder.product]
     const newProducts=distinctProducts(duplicateProducts)
-    setProducts(newProducts)
-  }
-  const handleRemoveOrder = (orderId,productId) => {
-    const updatedOrders=orders.filter(order=>order.id!==orderId)
-    setOrders(updatedOrders)
 
+    setUser({...user,orders:[...user.orders,newOrder], products:newProducts})
+  }
+  const handleRemoveOrder = (orderId) => {
+    const updatedOrders=user.orders.filter(order=>order.id!==orderId)
     const duplicateProducts=updatedOrders.map((order)=>order.product)
     const newProducts=distinctProducts(duplicateProducts)
-    setProducts(newProducts)
+    setUser({...user, orders:updatedOrders, products:newProducts})
   }
 
-
+  const handleNewProduct= (newProduct)=>{
+    setAllProducts([...allProducts,newProduct])
+  }
+  
   if (!user) return <Login onLogin={setUser}/>
 
   return (
@@ -55,16 +70,16 @@ function App() {
       <main>
         <Switch>
           <Route path="/new_product">
-            <NewProduct></NewProduct>
+            <NewProduct onAddProduct={handleNewProduct}></NewProduct>
           </Route>
           <Route path="/my_orders">
-            <MyOrders orders={orders} onDeleteOrder={handleRemoveOrder}></MyOrders>
+            <MyOrders orders={user.orders} onDeleteOrder={handleRemoveOrder}></MyOrders>
           </Route>
           <Route path='/my_products'>
-            <MyProducts products={products}></MyProducts>
+            <MyProducts products={user.products}></MyProducts>
           </Route>
           <Route path="/">
-            <AllProducts onAddOrder={handleNewOrder}></AllProducts>
+            <AllProducts products={allProducts} onAddOrder={handleNewOrder}></AllProducts>
           </Route>
         </Switch>
       </main>

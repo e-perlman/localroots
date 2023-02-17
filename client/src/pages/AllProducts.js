@@ -4,14 +4,14 @@ import ProductCard from "../components/ProductCard";
 import Box from "../style/Box"
 import Button from "../style/Button"
 
-const AllProducts = ({onAddOrder}) => {
-    const [products, setProducts]=useState([])
+const AllProducts = ({products,onAddOrder}) => {
+    // const [products, setProducts]=useState([])
 
-    useEffect(() => {
-      fetch("/products")
-        .then((r) => r.json())
-        .then(setProducts);
-    }, []);
+    // useEffect(() => {
+    //   fetch("/products")
+    //     .then((r) => r.json())
+    //     .then(setProducts);
+    // }, []);
 
   return (
     <Wrapper>

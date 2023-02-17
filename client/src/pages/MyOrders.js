@@ -8,7 +8,6 @@ import Button from "../style/Button"
 
 const MyOrders = ({orders, onDeleteOrder}) => {
 
-
   return (
     <Wrap>
     <h1>My Orders</h1>

@@ -13,26 +13,7 @@ class ProductsController < ApplicationController
         render json: product, status: :created
     end
 
-    def show
-        product=find_product
-        render json: product, status: :ok
-    end
 
-    def destroy
-        product=find_product
-        product.destroy
-        head :no_content
-    end
-
-    def myproducts
-        if session[:user_id]
-            user=User.find_by(id:[session[:user_id]])
-            products=user.products
-            render json: products, status: :ok
-        else
-            render json: {errors:["Not logged in."]}, status: :unauthorized
-        end
-    end
 
     private
 
@@ -41,7 +22,7 @@ class ProductsController < ApplicationController
     end
 
     def render_unprocessable_entity_response(invalid)
-        render json: { errors: [invalid.record.errors] }, status: :unprocessable_entity
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
     end
 
     def find_product

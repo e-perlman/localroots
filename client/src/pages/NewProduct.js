@@ -7,12 +7,12 @@ import styled from "styled-components";
 
 
 
-const NewProduct = () => {
+const NewProduct = ({onAddProduct}) => {
     const [productInfo, setProductInfo]=useState({
         name:'',
         category:'',
         store:'',
-        price:'',
+        price:''
     })
     
     const [errors,setErrors]=useState([])
@@ -34,7 +34,15 @@ const NewProduct = () => {
             }),
           }).then((r) => {
             if (r.ok) {
-              r.json().then((user) => history.push("/"));
+              r.json().then((product) => {
+                onAddProduct(product)
+                setProductInfo({
+                      name:'',
+                      category:'',
+                      store:'',
+                      price:''
+                    })
+              });
             } else {
               r.json().then((err) => setErrors(err.errors));
             }

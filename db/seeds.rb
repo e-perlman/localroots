@@ -1,6 +1,5 @@
 require 'faker'
 
-User.destroy_all
 Product.destroy_all
 
 10.times do

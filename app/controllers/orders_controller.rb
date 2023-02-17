@@ -3,6 +3,22 @@ class OrdersController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
+    def value
+        value=params[:number].to_f
+        orders=Order.all.select {|order| order.product.price < value}
+        render json: orders
+    end
+
+    def store
+        store=params[:store]
+        products=Product.all.filter{|product| product.store.downcase.include?(store.downcase)}
+        orders=products.map{|product| product.orders}
+        if orders.flatten.length>0
+            render json: orders.flatten
+        else
+            render json: {error:"No orders found."}
+        end
+    end
     
     def index
         user=find_user
